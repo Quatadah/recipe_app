@@ -9,7 +9,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/bgAndroid"
+        android:background="@drawable/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -34,6 +34,7 @@
             android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
             android:text="Cook like a chef"
+            android:fontFamily="sans-serif"
             android:textColor="@color/lightGrey"
             android:textFontWeight="500"
             android:textSize="40dp" />
@@ -43,11 +44,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="70dp"
-            android:text="Explore recipes and start cooking like a pro, I just need two lines"
+            android:text="Explore recipes and start cooking like a pro."
             android:textColor="@color/lightGrey"
             android:textSize="20dp" />
 
         <Button
+            android:id="@+id/explore_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="20dp"
@@ -55,6 +57,9 @@
             android:layout_marginTop="150dp"
             android:layout_marginHorizontal="100dp"
             android:text="Explore"
+            android:textColor="@color/darkGrey"
+            android:fontFamily="sans-serif"
+            android:textFontWeight="900"
             android:textSize="20dp" />
 
     </androidx.cardview.widget.CardView>
