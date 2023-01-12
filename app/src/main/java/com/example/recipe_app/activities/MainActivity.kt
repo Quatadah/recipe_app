@@ -1,11 +1,10 @@
-package com.example.recipe_app
+package com.example.recipe_app.activities
 
-import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.recipe_app.databinding.ActivityMainBinding
-import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,8 +15,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.exploreButton.setOnClickListener {
+            Log.i("info", "here fails")
             val intent = Intent(applicationContext, CategoriesActivity::class.java)
+            Log.i("info", "should work")
             startActivity(intent)
         }
+
+        supportActionBar?.hide()
     }
+
 }
