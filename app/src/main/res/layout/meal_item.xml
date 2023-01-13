@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginHorizontal="20dp"
+    android:background="@color/midGrey"
+    >
+
+    <ImageView
+        android:id="@+id/meal_image"
+        android:layout_width="118dp"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/meal_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="start"
+            android:padding="16dp"
+            android:text="Baked salmon with fennel and tomatoes"
+            android:textColor="@color/lightGrey"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/meal_timing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@android:dimen/app_icon_size"
+            android:text="45 min"
+            android:textColor="@color/darkGrey"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>
+

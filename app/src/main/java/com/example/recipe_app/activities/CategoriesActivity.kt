@@ -25,9 +25,6 @@ import org.json.JSONArray
 
 
 class CategoriesActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityCategoriesBinding
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var categories: List<Category>
     private lateinit var adapter: CategoriesAdapter
     private val mealService = MealService();
 

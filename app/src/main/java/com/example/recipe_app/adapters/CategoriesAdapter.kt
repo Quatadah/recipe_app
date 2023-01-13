@@ -3,15 +3,18 @@ package com.example.recipe_app.adapters
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipe_app.R
 import com.example.recipe_app.activities.CategoriesActivity
+import com.example.recipe_app.activities.MealsActivity
 import org.w3c.dom.Text
 
 data class Category(val strCategory: String)
@@ -39,6 +42,10 @@ class CategoriesAdapter: RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
         if (categories.size > position) {
             val category = categories[position]
             holder.categoryName.text = category.strCategory
+        }
+        holder.categoryName.setOnClickListener {
+            val intent = Intent(applicationContext, MealsActivity::class.java)
+            startActivity(intent)
         }
     }
 
