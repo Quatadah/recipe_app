@@ -12,7 +12,8 @@ import com.example.recipe_app.R
 data class Meal(val strMeal: String, val strMealThumb: String)
 
 
-class MealsAdapter(private val meals: List<Meal>) : RecyclerView.Adapter<MealsAdapter.MealViewHolder>() {
+class MealsAdapter(var meals: List<Meal>) : RecyclerView.Adapter<MealsAdapter.MealViewHolder>() {
+
 
     class MealViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val mealImage: ImageView = itemView.findViewById(R.id.meal_image)

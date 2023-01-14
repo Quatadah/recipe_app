@@ -1,6 +1,7 @@
 package com.example.recipe_app.activities
 
 import android.content.Context
+import android.content.Intent
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -34,7 +35,11 @@ class CategoriesActivity : AppCompatActivity() {
 
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = CategoriesAdapter()
+        adapter = CategoriesAdapter() {category ->
+            val intent = Intent(this, MealsActivity::class.java)
+            intent.putExtra("category", category.strCategory)
+            startActivity(intent)
+        }
         recyclerView.adapter = adapter
         mealService.getCategories { apiCategories ->
             runOnUiThread {
@@ -55,23 +60,5 @@ class CategoriesActivity : AppCompatActivity() {
         supportActionBar?.hide()
     }
 
-
-    fun getCategories() : List<Category> {
-        var categories = emptyList<Category>();
-        mealService.getCategories { apiCategories ->
-            if (apiCategories != null) {
-                categories = apiCategories
-                Log.i("categoriesActivity", categories.toString())
-            } else {
-                Log.e("Categories", "Unable to show categories")
-                val category1 = Category("Breakfast")
-                val category2 = Category("Lunch")
-                val category3 = Category("Dinner")
-                val category4 = Category("Desserts")
-                categories = listOf(category1, category2, category3, category4)
-            }
-        }
-        return categories;
-    }
 
 }

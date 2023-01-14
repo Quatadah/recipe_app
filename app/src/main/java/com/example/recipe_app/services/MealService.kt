@@ -27,7 +27,7 @@ data class Meals(val meals: List<Meal>)
 
 class MealService {
     var URL_CATEGORIES      = "https://www.themealdb.com/api/json/v1/1/categories.php"
-    var MEALS           = "https://www.themealdb.com/api/json/v1/1/filter.php?c={strCategory}"
+    var URL_MEALS           = "https://www.themealdb.com/api/json/v1/1/filter.php?c={strCategory}"
     var SEARCH_MEAL     = "https://www.themealdb.com/api/json/v1/1/search.php?s={strMeal}"
     var RECIPE          = "https://www.themealdb.com/api/json/v1/1/lookup.php?i={idMeal}"
     var RANDOMRECIPE    = "https://www.themealdb.com/api/json/v1/1/random.php"
@@ -49,23 +49,25 @@ class MealService {
         })
     }
 
-    fun getMeals(category: String, callback: (List<Meal>?) -> Unit) {
-        val url = MEALS.replace("{strCategory}", category)
-        callbackBuilder.GET(url, object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                Log.e("Okhttp", "Failure on fetching meals")
-                callback(null)
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                val responseString = response.body?.string()
-                val mealsResponse = Gson().fromJson(responseString, Meals::class.java)
-                val meals = mealsResponse?.meals?.map {
-                    Meal(it.strMeal, it.strMealThumb)
+    fun getMeals(category: String?, callback: (List<Meal>?) -> Unit) {
+        val url = category?.let { URL_MEALS.replace("{strCategory}", it) }
+        if (url != null) {
+            callbackBuilder.GET(url, object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    Log.e("Okhttp", "Failure on fetching meals")
+                    callback(null)
                 }
-                callback(meals)
-            }
-        })
+
+                override fun onResponse(call: Call, response: Response) {
+                    val responseString = response.body?.string()
+                    val mealsResponse = Gson().fromJson(responseString, Meals::class.java)
+                    val meals = mealsResponse?.meals?.map {
+                        Meal(it.strMeal, it.strMealThumb)
+                    }
+                    callback(meals)
+                }
+            })
+        }
     }
 
 
