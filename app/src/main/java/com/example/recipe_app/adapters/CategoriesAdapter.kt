@@ -20,7 +20,7 @@ import org.w3c.dom.Text
 data class Category(val strCategory: String)
 
 
-class CategoriesAdapter: RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
+class CategoriesAdapter(private val onCLick: (Category) -> Unit): RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
 
     private var categories: List<Category> = emptyList()
 
@@ -42,10 +42,9 @@ class CategoriesAdapter: RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
         if (categories.size > position) {
             val category = categories[position]
             holder.categoryName.text = category.strCategory
-        }
-        holder.categoryName.setOnClickListener {
-            val intent = Intent(applicationContext, MealsActivity::class.java)
-            startActivity(intent)
+            holder.categoryName.setOnClickListener {
+                onCLick(category);
+            }
         }
     }
 

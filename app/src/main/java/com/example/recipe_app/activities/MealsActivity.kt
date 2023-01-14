@@ -31,13 +31,19 @@ class MealsActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
 
         mealService.getMeals(category) { apiMeals ->
-            if (apiMeals != null) {
-                meals = apiMeals
-                adapter.setData(meals)
-            } else {
-                Log.e("Meals", "Unable to show meals")
-                // show an error message or default meals
+            runOnUiThread {
+                if (apiMeals != null) {
+                    meals = apiMeals
+                    adapter.meals = meals
+                    adapter.notifyDataSetChanged()
+                } else {
+                    Log.e("Meals", "Unable to show meals")
+                    // show an error message or default meals
+                }
             }
         }
+
+        supportActionBar?.hide()
+
     }
 }
