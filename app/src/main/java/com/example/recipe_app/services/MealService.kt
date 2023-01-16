@@ -87,7 +87,11 @@ class MealService {
                     val mealObject = mealArray.getJSONObject(0)
                     var listIngredients = ""
                     for (i in 1..20) {
-                        listIngredients += mealObject.getString("strMeasure$i") + " " + mealObject.getString("strIngredient$i") + "\n"
+                        val ingredients = mealObject.getString("strIngredient$i")
+                        val measures = mealObject.getString("strMeasure$i")
+                        if (ingredients != "") {
+                            listIngredients += measures + " " + ingredients + "\n"
+                        }
                     }
                     val recipe = Recipe(
                         mealObject.getString("idMeal"),

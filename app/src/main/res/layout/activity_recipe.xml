@@ -27,15 +27,16 @@
 
     <Button
         android:id="@+id/youtubeButton"
-        android:layout_width="299dp"
-        android:layout_height="47dp"
+        android:layout_width="340dp"
+        android:layout_height="59dp"
         android:text="Lien vers Youtube"
         android:textColor="@color/darkGrey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageView"
-        app:layout_constraintVertical_bias="0.926" />
+        app:layout_constraintVertical_bias="0.936" />
 
     <ScrollView
         android:layout_width="291dp"
@@ -55,11 +56,11 @@
             <TextView
                 android:id="@+id/textView1"
                 android:layout_width="match_parent"
-                android:layout_height="41dp"
+                android:layout_height="60dp"
                 android:gravity="center"
                 android:text="Ingredients"
                 android:textColor="@color/lightGrey"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -72,11 +73,11 @@
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
-                android:layout_height="41dp"
+                android:layout_height="60dp"
                 android:gravity="center"
                 android:text="Instructions"
                 android:textColor="@color/lightGrey"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
             <TextView
