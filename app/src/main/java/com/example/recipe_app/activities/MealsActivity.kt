@@ -1,5 +1,6 @@
 package com.example.recipe_app.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -27,7 +28,11 @@ class MealsActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.meals_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = MealsAdapter(meals)
+        adapter = MealsAdapter(meals) {meal ->
+            val intent = Intent(this, RecipeActivity::class.java)
+            intent.putExtra("idMeal", meal.idMeal)
+            startActivity(intent)
+        }
         recyclerView.adapter = adapter
 
         mealService.getMeals(category) { apiMeals ->

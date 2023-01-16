@@ -5,8 +5,10 @@ import android.util.Log
 import android.widget.Toast
 import com.example.recipe_app.adapters.Category
 import com.example.recipe_app.adapters.Meal
+import com.example.recipe_app.models.Recipe
 import com.google.gson.Gson
 import okhttp3.*
+import org.json.JSONObject
 import java.io.IOException
 
 class CallbackBuilder{
@@ -62,12 +64,48 @@ class MealService {
                     val responseString = response.body?.string()
                     val mealsResponse = Gson().fromJson(responseString, Meals::class.java)
                     val meals = mealsResponse?.meals?.map {
-                        Meal(it.strMeal, it.strMealThumb)
+                        Meal(it.idMeal, it.strMeal, it.strMealThumb)
                     }
                     callback(meals)
                 }
             })
         }
+    }
+
+    fun getRecipe(idMeal: String?, callback: (Recipe?) -> Unit) {
+        val url = idMeal?.let { RECIPE.replace("{idMeal}", it) }
+        if (url != null) {
+            callbackBuilder.GET(url, object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    Log.e("Okhttp", "Failure on fetching Recipe")
+                    callback(null)
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    val responseString: String? = response.body?.string()
+                    val mealArray = JSONObject(responseString).getJSONArray("meals")
+                    val mealObject = mealArray.getJSONObject(0)
+                    var listIngredients = ""
+                    for (i in 1..20) {
+                        val ingredients = mealObject.getString("strIngredient$i")
+                        val measures = mealObject.getString("strMeasure$i")
+                        if (ingredients != "") {
+                            listIngredients += measures + " " + ingredients + "\n"
+                        }
+                    }
+                    val recipe = Recipe(
+                        mealObject.getString("idMeal"),
+                        mealObject.getString("strMeal"),
+                        mealObject.getString("strInstructions"),
+                        mealObject.getString("strMealThumb"),
+                        mealObject.getString("strYoutube"),
+                        listIngredients,
+                    )
+                    callback(recipe)
+                }
+            })
+        }
+
     }
 
 
