@@ -1,8 +1,10 @@
 package com.example.recipe_app.activities
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +19,7 @@ class RecipeActivity : AppCompatActivity() {
     private lateinit var textViewIngredients: TextView
     private lateinit var textViewInstructions: TextView
     private lateinit var image : ImageView
+    private lateinit var youtubeButton : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +27,7 @@ class RecipeActivity : AppCompatActivity() {
         textViewIngredients=findViewById(R.id.ingredients)
         textViewInstructions=findViewById(R.id.instructions)
         image=findViewById(R.id.imageView)
+        youtubeButton=findViewById(R.id.youtubeButton)
 
         val idMeal = intent.getStringExtra("idMeal")
         mealService.getRecipe(idMeal) { apiRecipe ->
@@ -32,6 +36,11 @@ class RecipeActivity : AppCompatActivity() {
                     recipe = apiRecipe
                     textViewIngredients.text = recipe.listIngredients
                     textViewInstructions.text = recipe.strInstruction
+                    youtubeButton.setOnClickListener {
+                        val youtubeIntent = Intent(Intent.ACTION_VIEW, Uri.parse(recipe.strYoutube))
+                        startActivity(youtubeIntent)
+                    }
+
                     Glide.with(this)
                         .load(recipe.strMealThumb)
                         .into(image)

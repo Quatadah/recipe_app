@@ -26,7 +26,7 @@
 
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/youtubeButton"
         android:layout_width="299dp"
         android:layout_height="47dp"
         android:text="Lien vers Youtube"
